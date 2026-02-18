@@ -36,9 +36,13 @@ class MainScene extends Phaser.Scene {
         this.cols = Math.floor(800 / this.gridSize);
         this.rows = Math.floor(600 / this.gridSize);
         
-        // Snake array (head first)
+        // Snake array (head first) - start with 3 segments
+        const startX = Math.floor(this.cols / 2);
+        const startY = Math.floor(this.rows / 2);
         this.snake = [
-            { x: Math.floor(this.cols / 2), y: Math.floor(this.rows / 2) }
+            { x: startX, y: startY },
+            { x: startX - 1, y: startY },
+            { x: startX - 2, y: startY }
         ];
         this.direction = { x: 1, y: 0 };
         this.lastMoveTime = 0;
