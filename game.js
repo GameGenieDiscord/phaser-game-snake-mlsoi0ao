@@ -88,7 +88,7 @@ class MainScene extends Phaser.Scene {
 
     update(time) {
         if (this.gameOver) {
-            if (this.spaceKey.isDown) {
+            if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
                 this.scene.restart();
             }
             return;
