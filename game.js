@@ -64,23 +64,32 @@ class MainScene extends Phaser.Scene {
         // Game over flag
         this.gameOver = false;
         
-        // Game over text (hidden initially)
-        this.gameOverText = this.add.text(400, 300, 'GAME OVER', {
-            fontSize: '48px',
+        // Game over container
+        this.gameOverContainer = this.add.container(400, 300);
+        
+        // Background panel
+        const panel = this.add.graphics();
+        panel.fillStyle(0x000000, 0.8);
+        panel.fillRoundedRect(-150, -80, 300, 160, 16);
+        
+        // Game over text
+        const gameOverLabel = this.add.text(0, -40, 'GAME OVER', {
+            fontSize: '36px',
             fill: '#ff0000',
-            fontFamily: 'Arial'
-        });
-        this.gameOverText.setOrigin(0.5);
-        this.gameOverText.setVisible(false);
+            fontFamily: 'Arial',
+            fontStyle: 'bold'
+        }).setOrigin(0.5);
         
         // Restart instruction
-        this.restartText = this.add.text(400, 350, 'Press SPACE to restart', {
-            fontSize: '24px',
+        const restartLabel = this.add.text(0, 10, 'Press SPACE to restart', {
+            fontSize: '20px',
             fill: '#ffffff',
             fontFamily: 'Arial'
-        });
-        this.restartText.setOrigin(0.5);
-        this.restartText.setVisible(false);
+        }).setOrigin(0.5);
+        
+        // Add panel and texts to container
+        this.gameOverContainer.add([panel, gameOverLabel, restartLabel]);
+        this.gameOverContainer.setVisible(false);
         
         // Space key for restart
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -169,8 +178,7 @@ class MainScene extends Phaser.Scene {
         // Re-add UI texts
         this.add.existing(this.scoreText);
         if (this.gameOver) {
-            this.add.existing(this.gameOverText);
-            this.add.existing(this.restartText);
+            this.add.existing(this.gameOverContainer);
         }
         
         // Draw food
@@ -187,8 +195,7 @@ class MainScene extends Phaser.Scene {
     
     endGame() {
         this.gameOver = true;
-        this.gameOverText.setVisible(true);
-        this.restartText.setVisible(true);
+        this.gameOverContainer.setVisible(true);
     }
 }
 
