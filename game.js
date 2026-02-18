@@ -9,14 +9,14 @@ class MainScene extends Phaser.Scene {
         // Create simple textures programmatically
         const graphics = this.make.graphics({ x: 0, y: 0, add: false });
         
-        // Snake head texture (green square)
-        graphics.fillStyle(0x00ff00);
+        // Snake head texture (orange square)
+        graphics.fillStyle(0xff9900);
         graphics.fillRect(0, 0, 16, 16);
         graphics.generateTexture('head', 16, 16);
         
-        // Snake body texture (slightly darker green)
+        // Snake body texture (slightly darker orange)
         graphics.clear();
-        graphics.fillStyle(0x00cc00);
+        graphics.fillStyle(0xe68000);
         graphics.fillRect(0, 0, 16, 16);
         graphics.generateTexture('body', 16, 16);
         
