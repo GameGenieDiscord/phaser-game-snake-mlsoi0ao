@@ -62,9 +62,6 @@ class MainScene extends Phaser.Scene {
         // Input
         this.cursors = this.input.keyboard.createCursorKeys();
         
-        // Draw initial state
-        this.drawGame();
-        
         // Game over flag
         this.gameOver = false;
         
@@ -85,7 +82,7 @@ class MainScene extends Phaser.Scene {
         }).setOrigin(0.5);
         
         // Restart instruction
-        const restartLabel = this.add.text(0, 10, 'game over - restart game by pressing Space', {
+        const restartLabel = this.add.text(0, 10, 'restart game by pressing Space', {
             fontSize: '16px',
             fill: '#ffffff',
             fontFamily: 'Arial'
@@ -97,6 +94,9 @@ class MainScene extends Phaser.Scene {
         
         // Space key for restart
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        
+        // Draw initial state
+        this.drawGame();
     }
 
     update(time) {
@@ -176,16 +176,14 @@ class MainScene extends Phaser.Scene {
     }
     
     drawGame() {
-        // Clear previous sprites
-        this.children.removeAll(true);
+        // Clear only sprites, not UI texts or container
+        this.children.list.forEach(child => {
+            if (child !== this.scoreText && child !== this.gameOverContainer) {
+                child.destroy();
+            }
+        });
         
-        // Re-add UI texts
-        this.add.existing(this.scoreText);
-        if (this.gameOver) {
-            this.add.existing(this.gameOverContainer);
-        }
-        
-        // Draw food
+        // Re-add food
         const foodSprite = this.add.sprite(this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, 'food');
         foodSprite.setOrigin(0.5);
         
