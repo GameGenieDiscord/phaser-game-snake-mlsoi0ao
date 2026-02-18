@@ -85,8 +85,8 @@ class MainScene extends Phaser.Scene {
         }).setOrigin(0.5);
         
         // Restart instruction
-        const restartLabel = this.add.text(0, 10, 'Press SPACE to restart', {
-            fontSize: '20px',
+        const restartLabel = this.add.text(0, 10, 'game over - restart game by pressing Space', {
+            fontSize: '16px',
             fill: '#ffffff',
             fontFamily: 'Arial'
         }).setOrigin(0.5);
